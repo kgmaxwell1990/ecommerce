@@ -10,6 +10,7 @@ def view_cart(request):
     for item_id, item_quantity in cart.items():
         this_product = get_object_or_404(Product, pk=item_id)
         this_item = {
+            "id": this_product.id,
             "image": this_product.image,
             "name": this_product.name,
             "quantity": item_quantity,
@@ -33,5 +34,24 @@ def add_to_cart(request):
     request.session['cart'] = cart   
 
     return redirect('home')
+    
+def adjust_item(request, id):
+    cart = request.session.get('cart', {})
+    
+    quantity = int(request.POST['quantity'])
+    
+    if quantity > 0:
+        cart[id] = quantity
+    else:
+        del cart[id]
+        
+    request.session['cart'] = cart
+    return redirect('view_cart')
+    
+def delete_item(request, id):
+    cart = request.session.get('cart', {})
+    del cart[id]
+    request.session['cart'] = cart
+    return redirect('view_cart')
     
     
