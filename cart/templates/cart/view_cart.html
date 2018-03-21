@@ -1,0 +1,49 @@
+{% extends 'home/base.html' %}
+{% load bootstrap_tags %}
+{% block content %}
+<h1>Cart</h1>
+
+<div class="container-fluid">
+    <div class="col-sm-12">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <!--<th>Action</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart_items %}
+            <tr>
+                <td><img height="100" width="100" src="{{ MEDIA_URL }}{{ item.image }}"></td>
+                <td>{{ item.name }}</td>
+                <td>€{{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{item.item_total}}</td>
+                <!--<td>-->
+                <!--    <form method="post" action="#">-->
+                <!--        {% csrf_token %}-->
+                <!--        <input name='quantity' type="number" min="0" max="999">-->
+                <!--        <button type="submit">Adjust</button>-->
+                <!--    </form>-->
+
+                <!--</td>-->
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Basket Total</td>
+            <td>€{{ complete_total }}</td>
+            <!--<td></td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+    
+{% endblock %}
