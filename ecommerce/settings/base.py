@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'accounts',
     'products',
     'cart',
+    'reviews',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -130,5 +132,7 @@ AUTHENTICATION_BACKENDS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+STRIPE_PUBLISHABLE_KEY=os.environ.get("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY=os.environ.get("STRIPE_SECRET_KEY")
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

@@ -33,7 +33,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{% url 'home' %}"> Home</a></li>
                     <li><a href="{% url 'products' %}"> Products</a></li>
-                    <li><a href="{% url 'view_cart' %}">Cart<span class="badge">{{items_in_cart}}</span></a></li>
+                    <li><a href="{% url 'view_cart' %}">Cart
+                    {% if items_in_cart %}
+                    <span class="badge">{{items_in_cart}}</span>
+                    {% endif %}</a></li>
                     <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Account
