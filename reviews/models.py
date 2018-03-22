@@ -8,6 +8,7 @@ class Review(models.Model):
     title = models.CharField(max_length=250, blank=True, null=True)
     content = models.TextField()
     rating = models.IntegerField(blank=False, default=1)
+    # date = models.DateTimeField(auto_now_add=True, null=True)
     
     @property
     def stars(self):
