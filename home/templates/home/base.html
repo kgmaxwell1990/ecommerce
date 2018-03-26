@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>shotsNsquats</title>
+    <title>Ohm Boho</title>
     
     {% block style_js %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
@@ -44,28 +44,26 @@
                     </form>
                     </li>
                     <li><a href="{% url 'home' %}"> Home</a></li>
-                    <li><a href="{% url 'products' %}"> Products</a></li>
+                    <li><a href="{% url 'products' %}"> Jewellery</a></li>
+                    <li><a href="#"> Bags</a></li>
+                    <li><a href="#"> Purses</a></li>
+                    <li><a href="#"> Scarves</a></li>
                     <li><a href="{% url 'view_cart' %}">Cart
                     {% if items_in_cart %}
-                    <span class="badge">{{items_in_cart}}</span>
+                    <span class="badge item_badge">{{items_in_cart}}</span>
                     {% endif %}</a></li>
-                    <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Account
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                    <li><a href="#"> WishList</a></li>
+    
                             {% if user.is_authenticated %}
-                                <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                                <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i></i> Profile</a></li>
+                                <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fas fa-sign-out-alt"></i></i> Log Out</a></li>
                             {%  else %}
-                                <li><a href="{% url 'register' %}next={{request.path}}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
-                                <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fa fa-sign-in"></i> Log In</a></li>
+                                <li><a href="{% url 'register' %}next={{request.path}}"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                                <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></i> Log In</a></li>
                             {% endif %}
-                            </ul>
-                    </li>
-                    
-                    
-                </ul>
+                          
+    
+     
             </div>
         </div>
     </nav>
@@ -77,25 +75,35 @@
             <img src="{% static 'home/images/logo.png' %}" width="50%">
             
             <div class="floating_cart">
-                    <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                Account
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                            {% if user.is_authenticated %}
-                                <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i> Profile</a></li>
-                                <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fa fa-sign-out"></i> Log Out</a></li>
-                            {%  else %}
-                                <li><a href="{% url 'register' %}next={{request.path}}"><i class="fa fa-user-plus"></i> Sign Up</a></li>
-                                <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fa fa-sign-in"></i> Log In</a></li>
-                            {% endif %}
-                            </ul>
-                    </div>
-                    
-                    <a href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i>Cart
+                <div>
+                    <a href="{% url 'view_cart' %}">Cart 
                     {% if items_in_cart %}
-                    <span class="badge">{{items_in_cart}}</span>
-                    {% endif %}</a>
+                    <span class="badge item_badge">{{items_in_cart}}</span>
+                    {% else %}
+                    <i class="fas fa-shopping-cart"></i>
+                    {% endif %}
+                    </a>
+                </div>
+                <div>
+                    <a href="#">Wishlist <i class="fas fa-heart"></i>
+                    </a>
+                </div>
+                <div class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Account
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i></i> Profile</a></li>
+                                <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fas fa-sign-out-alt"></i></i> Log Out</a></li>
+                            {%  else %}
+                                <li><a href="{% url 'register' %}next={{request.path}}"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                                <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></i> Log In</a></li>
+                            {% endif %}
+                        </ul>
+                </div>
+                    
+
 
             </div>
         </div>

@@ -13,3 +13,19 @@ def view_product(request, id):
     product_images = ProductImages.objects.filter(product=id)
     form = ReviewForm()
     return render(request, 'products/view_product.html', {'product':product, 'review_form': form, 'product_images':product_images})
+    
+def order_lowest(request):
+    products = Product.objects.order_by('price')
+    return render(request, 'products/products.html', {'products':products})
+    
+def order_highest(request):
+    products = Product.objects.order_by('-price')
+    return render(request, 'products/products.html', {'products':products})
+    
+def order_az(request):
+    products = Product.objects.order_by('name')
+    return render(request, 'products/products.html', {'products':products})
+    
+def order_za(request):
+    products = Product.objects.order_by('-name')
+    return render(request, 'products/products.html', {'products':products})

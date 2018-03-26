@@ -1,7 +1,12 @@
 {% extends 'home/base.html' %}
 {% load bootstrap_tags %}
 {% block content %}
-
+<div class="sort_by">
+<h5><a href="{% url 'lowest' %}">Sort By Lowest Price</a></h5>
+<h5><a href="{% url 'highest' %}">Sort By Highest Price</a></h5>
+<h5><a href="{% url 'az' %}">Sort A-Z</a></h5>
+<h5><a href="{% url 'za' %}">Sort Z-A</a></h5>
+</div>
     <div class="container-fluid">
     <div class="row">
     {% for product in products %}
@@ -17,7 +22,9 @@
                                 <p>{{product.description|truncatechars:20}}</p>
                             </div>
                             <div class="ratings">
+                                {% if product.reviews_received.all %}
                                 <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
+                                {% endif %}
                 {% if product.stars %}
                   {% for star in product.stars %}
                     <i class="fas fa-star"></i>
