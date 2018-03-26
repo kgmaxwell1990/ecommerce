@@ -3,9 +3,17 @@
 {% block content %}
 
 <div class="container">
-  <div class="row">
+  <div class="row prod_desc">
     <div class=col-sm-8>
-      <img width="100%" class="card-img-top img-fluid" src="{{MEDIA_URL}}{{product.image}}" alt="">
+      <div class="col-sm-3">
+        {% for image in product_images %}
+            <img width="70%" class="card-img-top img-fluid" src="{{MEDIA_URL}}{{image.image}}" alt=""><br>
+        {% endfor %}
+      </div>
+      <div class="col-sm-9">
+        <img width="70%" class="card-img-top img-fluid" src="{{MEDIA_URL}}{{product.image}}" alt="">
+      </div>
+
     </div>
     <div class=col-sm-4>
       <h2 class="product_name">{{product.name}}</h2>
@@ -23,18 +31,24 @@
         {% else %}
           <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
         {% endif %}
+        
+        
       </p>
+      <p><a>See Reviews</a></p>
+      <p class="product_order">
                   <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
               {% csrf_token %}
               <input type="hidden" name="id" value="{{product.id}}"/>
+              Quantity
               <input type="number" name="quantity" value="1" max="5" min="1"/>
               <input class="btn btn-success" type="submit" value="Add To Cart"/>
             </form>
+      </p>
     </div>
   </div>
-</div>
 
-        
+  <div class="row">
+    <div class="col-sm-12">
         {% include "reviews/_show_reviews.html" %}
 
         {% if user.is_authenticated %}
@@ -42,9 +56,9 @@
         {% else %}
           <p><a href="{% url 'login' %}?next={{request.path}}">Login</a> or <a href="{% url 'register' %}?next={{request.path}}">Register</a> to Leave a Review</p>
         {% endif %}
-        
+    </div> 
+  </div>
 
-          </div>
-      </div>
+</div>
 
 {% endblock content %}

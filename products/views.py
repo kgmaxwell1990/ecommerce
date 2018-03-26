@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Product, ProductImages
 from reviews.forms import ReviewForm
 from reviews.models import Review
 
@@ -10,6 +10,6 @@ def get_products(request):
     
 def view_product(request, id):
     product = get_object_or_404(Product, pk=id)
-    reviews = Review.objects.filter(product=id)
+    product_images = ProductImages.objects.filter(product=id)
     form = ReviewForm()
-    return render(request, 'products/view_product.html', {'product':product, 'review_form': form})
+    return render(request, 'products/view_product.html', {'product':product, 'review_form': form, 'product_images':product_images})
