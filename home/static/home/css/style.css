@@ -1,0 +1,16 @@
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Karma', serif;
+    color: black;
+    
+}
+
+.product_name {
+    letter-spacing: 4px; 
+    border-bottom: 1px solid #aeaeb0;
+}
+
+.form-control {
+    display: inline;
+    width: auto;
+    margin-top: 5px;
+}

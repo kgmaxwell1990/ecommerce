@@ -10,7 +10,6 @@ def get_products(request):
     
 def view_product(request, id):
     product = get_object_or_404(Product, pk=id)
+    reviews = Review.objects.filter(product=id)
     form = ReviewForm()
-
-    
     return render(request, 'products/view_product.html', {'product':product, 'review_form': form})

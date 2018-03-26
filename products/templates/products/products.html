@@ -13,20 +13,25 @@
                                 <h4 class="pull-right">€{{product.price}}</h4>
                                 <h4>{{product.name}}
                                 </h4>
+                                </a>
                                 <p>{{product.description}}</p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
+                {% if product.stars %}
+                  {% for star in product.stars %}
+                    <i class="fas fa-star"></i>
+                  {% endfor %}
+                  {% if product.needs_half_star %}
+                    <i class="fa fa-star-half"></i>
+                  {% endif %}   
+                  {{product.average_rating}} avg rating
+                {% else %}
+                  <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
+                {% endif %}
                             </div>
                         </div>
-                        </a>
+                        
                     </div>
     {% if forloop.counter|divisibleby:3 %}
         </div><div class="row">

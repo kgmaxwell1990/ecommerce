@@ -2,8 +2,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
 from django.conf import settings
+
 from home.views import *
 from products.views import get_products
+from search.views import do_search
+
 from accounts import urls as account_urls
 from products import urls as product_urls
 from cart import urls as cart_urls
@@ -19,5 +22,7 @@ urlpatterns = [
     url(r'^cart/', include(cart_urls)),
     url(r'^reviews/', include(reviews_urls)),
     url(r'^checkout/', include(checkout_urls)),
+    url(r'^search/', do_search, name="search"),
+    
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

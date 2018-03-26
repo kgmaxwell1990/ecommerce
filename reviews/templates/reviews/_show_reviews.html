@@ -9,10 +9,11 @@
     <p>{{review.content}}</p>
     <p><small >Rating:
               {% for star in review.stars %}
-                  &#9733;
+                  <i class="fas fa-star"></i>
               {% endfor %}
               </small></p>
-    <p><small class="text-muted">Posted by {{review.reviewer.username}}</small></p>
+    <p><small class="text-muted">Posted by {{review.reviewer.username}} | {{review.date}}</small></p>
+
     <hr>
     {%endfor%}
     </div>

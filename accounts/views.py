@@ -10,7 +10,7 @@ from .forms import UserLoginForm, UserRegistrationForm
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect("home")
+    return redirect(request.GET.get('next', 'home'))
     
 def login(request):
     redirect_to = request.GET.get('next', 'profile')
@@ -36,6 +36,7 @@ def profile(request):
     return render(request, "accounts/profile.html")
     
 def register(request):
+    redirect_to = request.GET.get('next', 'profile')
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -47,7 +48,7 @@ def register(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, "You have successfully registered")
-                return redirect('profile')
+                return redirect(redirect_to)
 
         else:
             messages.error(request, "unable to register you at this time!")
