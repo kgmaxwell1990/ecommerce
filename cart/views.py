@@ -19,7 +19,7 @@ def add_to_cart(request):
     cart[id] = cart.get(id, 0) + quantity
     request.session['cart'] = cart   
     messages.success(request, "You added to your cart")
-    return redirect(request.GET.get('next', 'product'))
+    return redirect(request.GET.get('next', 'products'))
     
 def adjust_item(request, id):
     cart = request.session.get('cart', {})

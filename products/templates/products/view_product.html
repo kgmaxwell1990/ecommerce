@@ -17,7 +17,29 @@
     </div>
     <div class=col-sm-4>
       <h2 class="product_name">{{product.name}}</h2>
-      <h4>€{{product.price}} | <i class="far fa-heart"></i></h4>
+      <div class="price_heart">
+      <h3>€{{product.price}} </h3>
+      {% if not in_wishlist  %}
+        <form action="{% url 'add_to_wishlist' %}?next={{request.path}}" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="id" value="{{product.id}}"/>
+          <button type="submit" class="btn heart_button">
+            <i class="far fa-heart fa-2x" type="submit"></i>
+          </button>
+        </form>
+      {% else  %}
+        <form action="{% url 'remove_wishlist_item' product.id %}?next={{request.path}}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn heart_button">
+            <i class="fas fa-heart fa-2x" type="submit"></i>
+                    
+          </button>
+        </form>
+        
+      {% endif %}
+      </div>
+     
+      
       <p class="card-text">{{product.description}}</p>
       <p>
         {% if product.stars %}
@@ -36,7 +58,7 @@
       </p>
       <p><a>See Reviews</a></p>
       <p class="product_order">
-                  <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
+            <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
               {% csrf_token %}
               <input type="hidden" name="id" value="{{product.id}}"/>
               Quantity

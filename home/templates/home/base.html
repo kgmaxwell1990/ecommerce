@@ -52,18 +52,19 @@
                     {% if items_in_cart %}
                     <span class="badge item_badge">{{items_in_cart}}</span>
                     {% endif %}</a></li>
-                    <li><a href="#"> WishList</a></li>
+                    <li><a href="{% url 'view_wishlist' %}"> WishList
+                    {% if items_in_wishlist %}
+                    <span class="badge item_badge">{{items_in_wishlist}}</span>
+                    {% endif %}</a></li>
     
-                            {% if user.is_authenticated %}
-                                <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i></i> Profile</a></li>
-                                <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fas fa-sign-out-alt"></i></i> Log Out</a></li>
-                            {%  else %}
-                                <li><a href="{% url 'register' %}next={{request.path}}"><i class="fas fa-user-plus"></i> Sign Up</a></li>
-                                <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></i> Log In</a></li>
-                            {% endif %}
-                          
-    
-     
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i></i> Profile</a></li>
+                        <li><a href="{% url 'logout' %}?next={{request.path}}"><i class="fas fa-sign-out-alt"></i></i> Log Out</a></li>
+                    {%  else %}
+                        <li><a href="{% url 'register' %}next={{request.path}}"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                        <li><a href="{% url 'login' %}?next={{request.path}}"><i class="fas fa-sign-in-alt"></i></i> Log In</a></li>
+                    {% endif %}
+                         
             </div>
         </div>
     </nav>
@@ -85,7 +86,12 @@
                     </a>
                 </div>
                 <div>
-                    <a href="#">Wishlist <i class="fas fa-heart"></i>
+                    <a href="{% url 'view_wishlist' %}">Wishlist 
+                    {% if items_in_wishlist %}
+                    <span class="badge item_badge">{{items_in_wishlist}}</span>
+                    {% else %}
+                    <i class="fas fa-heart"></i>
+                    {% endif %}
                     </a>
                 </div>
                 <div class="dropdown">

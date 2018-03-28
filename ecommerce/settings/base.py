@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'reviews',
     'checkout',
     'search',
+    'wishlist',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +73,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'cart.contexts.get_items_in_cart_count'
+                'cart.contexts.get_items_in_cart_count',
+                'wishlist.contexts.get_items_in_wishlist_count',
             ],
         },
     },

@@ -1,8 +1,8 @@
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Karma', serif;
     color: black;
-    
 }
+
 
 .alert-success {
     background-color: rgb(129,210,211);
@@ -40,7 +40,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .prod_desc {
-    height: 100vh;
     padding: 50px;
     border-bottom: 1px solid #aeaeb0;
 }
@@ -95,6 +94,15 @@ h1,h2,h3,h4,h5,h6 {
 .sort_by h5 a {
     color: rgb(129,210,211);
     text-decoration: none;
+}
+
+.price_heart h3,
+.price_heart form {
+    display: inline-block;
+}
+
+.price_heart button {
+    margin-bottom: 10px;
 }
 
 

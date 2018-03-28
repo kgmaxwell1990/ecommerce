@@ -12,7 +12,9 @@ def view_product(request, id):
     product = get_object_or_404(Product, pk=id)
     product_images = ProductImages.objects.filter(product=id)
     form = ReviewForm()
-    return render(request, 'products/view_product.html', {'product':product, 'review_form': form, 'product_images':product_images})
+    wishlist = request.session.get('wishlist', {})
+    in_wishlist = id in wishlist
+    return render(request, 'products/view_product.html', {'product':product, 'review_form': form, 'product_images':product_images, 'in_wishlist': in_wishlist})
     
 def order_lowest(request):
     products = Product.objects.order_by('price')
