@@ -1,13 +1,25 @@
 {% extends 'home/base.html' %}
 {% load bootstrap_tags %}
 {% block content %}
-<h1>Your Wishlist</h1><button class="btn btn-success">Add All To Cart</button>
+<div class="wishlist_header">
+<h1>Your Wishlist</h1>
+<button class="btn btn-success">Add All To Cart</button><br><br>
+<button class="btn btn-danger">Delete All From Wishlist</button>
+</div>
     <div class="container-fluid">
     <div class="row">
     {% for product in wishlist_items %}
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <a href="{% url 'view_product' product.id %}">
+                        <div class="x_for_close">
+                                <form  method="post" action="{% url 'remove_wishlist_item' product.id%}?next={{request.path}}">
+                                    {% csrf_token %}
+                                    <button type="submit"class="btn"><i class="far fa-times-circle fa-3x"></i></button>
+                                </form>
+                        </div>
+                                
                         <div class="thumbnail">
+
+                            <a href="{% url 'view_product' product.id %}">
                             <img src="{{product.image.url}}" alt="" height="400" width="300">
                             <div class="caption">
                                 <h4 class="pull-right">€{{product.price}}</h4>
@@ -16,29 +28,6 @@
                                 </a>
                                 <p>{{product.description|truncatechars:20}}</p>
                             </div>
-                            <div class="ratings">
-                                {% if product.reviews_received.all %}
-                                <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
-                                {% endif %}
-                {% if product.stars %}
-                  {% for star in product.stars %}
-                    <i class="fas fa-star"></i>
-                  {% endfor %}
-                  {% if product.needs_half_star %}
-                    <i class="fa fa-star-half"></i>
-                  {% endif %}   
-                  {{product.average_rating}} avg rating
-                {% else %}
-                  <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
-                {% endif %}
-                            </div>
-                        </div>
-                <div class="x_for_close">
-                    <form method="post" action="{% url 'remove_wishlist_item' product.id%}?next={{request.path}}">
-                        {% csrf_token %}
-                        <button type="submit"class="btn btn-success">Remove</button>
-                    </form>
-                </div>
                 <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
                   {% csrf_token %}
                   <input type="hidden" name="id" value="{{product.id}}"/>
@@ -46,6 +35,10 @@
                   <input type="number" name="quantity" value="1" max="5" min="1"/>
                   <input class="btn btn-success" type="submit" value="Add To Cart"/>
                 </form>
+    
+                        </div>
+
+
                     </div>
 
     {% if forloop.counter|divisibleby:3 %}

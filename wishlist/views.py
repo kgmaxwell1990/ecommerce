@@ -19,6 +19,7 @@ def add_to_wishlist(request):
     wishlist[id] = wishlist.get(id, 0) + quantity
     request.session['wishlist'] = wishlist
     messages.success(request, "You added to your wishlist!")
+    print(wishlist)
     return redirect(request.GET.get('next', 'home'))
     
     

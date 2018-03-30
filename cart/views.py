@@ -14,7 +14,11 @@ def view_cart(request):
 
 def add_to_cart(request):
     id = request.POST['id']
-    quantity = int(request.POST['quantity'])
+    if int(request.POST['quantity']) > 0:
+        quantity = int(request.POST['quantity'])
+    else:
+        quantity = 1
+        
     cart = request.session.get('cart', {})
     cart[id] = cart.get(id, 0) + quantity
     request.session['cart'] = cart   

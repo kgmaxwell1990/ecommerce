@@ -19,19 +19,26 @@
       <h2 class="product_name">{{product.name}}</h2>
       <div class="price_heart">
       <h3>€{{product.price}} </h3>
+
       {% if not in_wishlist  %}
-        <form action="{% url 'add_to_wishlist' %}?next={{request.path}}" method="post">
+        <form action="{% url 'add_to_wishlist' %}?next={{request.path}}" method="post" id="empty_heart_form">
+            <div id="tooltip" class="arrow_box">
+              <p>Add to <a href="{% url 'view_wishlist' %}">Wishlist</a></p>
+            </div>
           {% csrf_token %}
           <input type="hidden" name="id" value="{{product.id}}"/>
-          <button type="submit" class="btn heart_button">
-            <i class="far fa-heart fa-2x" type="submit"></i>
+          <button type="submit" class="btn">
+            <i id="empty_heart_icon" class="far fa-heart fa-2x" type="submit"></i>
           </button>
         </form>
       {% else  %}
-        <form action="{% url 'remove_wishlist_item' product.id %}?next={{request.path}}" method="post">
+      <div id="tooltip_remove" class="arrow_box">
+        <p>Remove from <a href="{% url 'view_wishlist' %}">Wishlist</a></p>
+      </div>
+        <form action="{% url 'remove_wishlist_item' product.id %}?next={{request.path}}" method="post" id="full_heart_form">
           {% csrf_token %}
-          <button type="submit" class="btn heart_button">
-            <i class="fas fa-heart fa-2x" type="submit"></i>
+          <button type="submit" class="btn">
+            <i id="full_heart_icon" class="fas fa-heart fa-2x" type="submit"></i>
                     
           </button>
         </form>
@@ -41,7 +48,7 @@
      
       
       <p class="card-text">{{product.description}}</p>
-      <p>
+      <p class="stars_and_reviews_view_product">
         {% if product.stars %}
           {% for star in product.stars %}
             <i class="fas fa-star"></i>
@@ -50,13 +57,19 @@
             <i class="fa fa-star-half"></i>
           {% endif %}   
           {{product.average_rating}} avg rating
+          <a>See Reviews</a>
         {% else %}
-          <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
+          <p>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            <i class="far fa-star"></i>
+            No reviews yet
+            <a>Leave a Review</a>
+          </p>
         {% endif %}
-        
-        
       </p>
-      <p><a>See Reviews</a></p>
       <p class="product_order">
             <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
               {% csrf_token %}
