@@ -1,5 +1,6 @@
-    <div class="row">
+
         {% for item in cart_items %}
+        <div class="row cart_items">
         <div class="col-sm-4">
             <h4>Item</h4>
             <img height="100" width="100" src="{{ MEDIA_URL }}{{ item.image }}">
@@ -14,23 +15,25 @@
             <h4>Quantity</h4>
             <form method="post" action="{% url 'adjust_item' item.id %}">
                 {% csrf_token %}
-                <input name='quantity' type="number" value="{{item.quantity}}" min="0" max="5">
-                <button type="submit">Adjust</button>
+                <input class="form-control quantity_form" name='quantity' type="number" value="{{item.quantity}}" min="0" max="5">
+                <button class="btn btn-warning" type="submit">Adjust</button>
             </form>
         </div>
         <div class="col-sm-2">
             <h4>Total</h4>
-            {{item.item_total}}
+            €{{item.item_total}}
         </div>
         <div class="col-sm-2">
-            <h4>Remove</h4>
-                <form method="post" action="{% url 'delete_item' item.id %}">
+            <br>
+                <form  method="post" action="{% url 'delete_item' item.id %}?next={{request.path}}">
                     {% csrf_token %}
-                    <button type="submit">Delete</button>
+                    <button type="submit"class="btn"><i class="far fa-times-circle fa-3x"></i></button>
                 </form>
+
         </div>
-    </div>
+        </div>
     {% endfor %}
+
 
     
     

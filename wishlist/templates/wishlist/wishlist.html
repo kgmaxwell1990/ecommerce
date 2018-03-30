@@ -3,13 +3,20 @@
 {% block content %}
 <div class="wishlist_header">
 <h1>Your Wishlist</h1>
-<button class="btn btn-success">Add All To Cart</button><br><br>
-<button class="btn btn-danger">Delete All From Wishlist</button>
+<form method="post" action="{% url 'add_all_wishlist_items_to_cart' %}?next={{request.path}}">
+    {% csrf_token %}
+    <button class="btn btn-success btn-lg" type="submit">Add all to Cart</button>
+</form>
+<br>
+<form method="post" action="{% url 'delete_all_wishlist_items' %}?next={{request.path}}">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Delete all from Wishlist</button>
+</form>
 </div>
     <div class="container-fluid">
     <div class="row">
     {% for product in wishlist_items %}
-                    <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="col-sm-4">
                         <div class="x_for_close">
                                 <form  method="post" action="{% url 'remove_wishlist_item' product.id%}?next={{request.path}}">
                                     {% csrf_token %}
@@ -28,22 +35,22 @@
                                 </a>
                                 <p>{{product.description|truncatechars:20}}</p>
                             </div>
+                <div class="wishlist_items_form">
                 <form action="{% url 'add_to_cart' %}?next={{request.path}}" method="post">
                   {% csrf_token %}
-                  <input type="hidden" name="id" value="{{product.id}}"/>
+                  <input  type="hidden" name="id" value="{{product.id}}"/>
                   Quantity
-                  <input type="number" name="quantity" value="1" max="5" min="1"/>
+                  <input class="form-control quantity_form" type="number" name="quantity" value="1" max="5" min="1"/>
                   <input class="btn btn-success" type="submit" value="Add To Cart"/>
                 </form>
+                </div>
     
                         </div>
 
 
                     </div>
 
-    {% if forloop.counter|divisibleby:3 %}
-        </div><div class="row">
-    {% endif %}
+
     {% endfor %}
     </div>
     </div>

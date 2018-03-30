@@ -13,6 +13,17 @@ a:hover {
     text-decoration: none;
 }
 
+.form-control {
+    display: inline;
+    width: 40%;
+    margin-top: 5px;
+}
+
+.quantity_form {
+    width: 50px;
+}
+
+
 .intro {
     font-size: 120%;
     color: red;
@@ -53,11 +64,7 @@ a:hover {
     border-top: 1px solid #aeaeb0;
 }
 
-.form-control {
-    display: inline;
-    width: 40%;
-    margin-top: 5px;
-}
+
 
 .prod_desc {
     padding: 50px;
@@ -98,15 +105,21 @@ a:hover {
 .btn-success {
     background-image: none;
     background-color: rgb(129,210,211);
-    border: none;
+    border-color: rgb(129,210,211);
 }
 
 .btn-success:hover {
     background-color: #aeaeb0;
 }
 
-.btn-danger {
-    border: none;
+.btn-warning {
+    background-image: none;
+    background-color: #aeaeb0;
+    border-color: #aeaeb0;
+}
+
+.btn-warning:hover {
+    background-color: rgb(129,210,211);
 }
 
 .navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus {
@@ -233,8 +246,20 @@ a:hover {
     margin-bottom: 30px;
 }
 
+.wishlist_items_form {
+    text-align: center;
+}
+
 .total_and_checkout {
     text-align: right;
+}
+
+.cart_items {
+    text-align: center;
+}
+
+.cart_items h4 {
+    border-bottom: 1px solid #aeaeb0;
 }
 
 @media screen and (min-width:768px) {
