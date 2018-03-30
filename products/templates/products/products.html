@@ -50,8 +50,13 @@
                             </div>
                             <div class="ratings">
                                 {% if product.reviews_received.all %}
-                                <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
+                                  {% if product.reviews_received.all|length == 1 %}
+                                    <p class="pull-right">{{product.reviews_received.all|length}} review</p>
+                                  {% else %}
+                                    <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
                                 {% endif %}
+                                {% endif %}
+                                
                 {% if product.stars %}
                   {% for star in product.stars %}
                     <i class="fas fa-star"></i>
@@ -67,9 +72,6 @@
                         </div>
                         
                     </div>
-    {% if forloop.counter|divisibleby:3 %}
-        </div><div class="row">
-    {% endif %}
     {% endfor %}
     </div>
     </div>
