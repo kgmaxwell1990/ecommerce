@@ -1,80 +1,69 @@
-{% extends 'home/base.html' %}
-{% load bootstrap_tags %}
+{% extends 'home/base.html' %} 
+{% load bootstrap_tags %} 
 {% block content %}
-<div class="sort_by">
-<h5><a href="{% url 'lowest' %}">Sort By Lowest Price</a></h5>
-<h5><a href="{% url 'highest' %}">Sort By Highest Price</a></h5>
-<h5><a href="{% url 'az' %}">Sort A-Z</a></h5>
-<h5><a href="{% url 'za' %}">Sort Z-A</a></h5>
-</div>
-    <div class="container-fluid">
-    <div class="row">
+<!--<div class="sort_by">-->
+<!--  <h5><a href="{% url 'lowest' %}">Sort By Lowest Price</a></h5>-->
+<!--  <h5><a href="{% url 'highest' %}">Sort By Highest Price</a></h5>-->
+<!--  <h5><a href="{% url 'az' %}">Sort A-Z</a></h5>-->
+<!--  <h5><a href="{% url 'za' %}">Sort Z-A</a></h5>-->
+<!--</div>-->
+<div class="container-fluid">
+  <div class="row">
     {% for product in products %}
-        <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="x_for_close">
-                                <form  method="post" action="{% url 'add_to_cart' %}?next={{request.path}}">
-                                  <input type="hidden" name="id" value="{{product.id}}"/>
-                                  <input type="hidden" name="quantity" value="1"/>
-                                    {% csrf_token %}
-                                    <button type="submit"class="btn"><i class="far fa-plus-square fa-3x"></i></i></i></button>
-                                </form>
-                        </div>
-            <a href="{% url 'view_product' product.id %}">
-            <div class="thumbnail">
-                <img src="{{product.image.url}}" alt="" height="400" width="300">
-                <div class="caption">
-                    <h4 class="pull-right">€{{product.price}}</h4>
-                    <h4>{{product.name}}
-                    </h4>
-                    </a>
-                    <p class="inline">{{product.description|truncatechars:20}}</p>
-      {% if not in_wishlist  %}
-        <form class="inline product_hearts" action="{% url 'add_to_wishlist' %}?next={{request.path}}" method="post" id="empty_heart_form">
-          {% csrf_token %}
-          <input type="hidden" name="id" value="{{product.id}}"/>
-          <button type="submit" class="btn">
+    <div class="col-sm-4 col-lg-4 col-md-4">
+      <div class="x_for_close">
+        <form method="post" action="{% url 'add_to_cart' %}?next={{request.path}}">
+          <input type="hidden" name="id" value="{{product.id}}" />
+          <input type="hidden" name="quantity" value="1" /> {% csrf_token %}
+          <button type="submit" class="btn"><i class="far fa-plus-square fa-3x"></i></i></i></button>
+        </form>
+      </div>
+      <a href="{% url 'view_product' product.id %}">
+        <div class="thumbnail">
+          <img src="{{product.image.url}}" alt="" height="400" width="300">
+          <div class="caption">
+            <h4 class="pull-right">€{{product.price}}</h4>
+            <h4>{{product.name}}
+            </h4>
+      </a>
+      <p class="inline">{{product.description|truncatechars:20}}</p>
+      {% if not in_wishlist %}
+      <form class="inline product_hearts" action="{% url 'add_to_wishlist' %}?next={{request.path}}" method="post" id="empty_heart_form">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{product.id}}" />
+        <button type="submit" class="btn">
             <i id="empty_heart_icon" class="far fa-heart fa-2x" type="submit"></i>
           </button>
-        </form>
-      {% else  %}
-        <form class="inline product_hearts" action="{% url 'remove_wishlist_item' product.id %}?next={{request.path}}" method="post" id="full_heart_form">
-          {% csrf_token %}
-          <button type="submit" class="btn">
+      </form>
+      {% else %}
+      <form class="inline product_hearts" action="{% url 'remove_wishlist_item' product.id %}?next={{request.path}}" method="post" id="full_heart_form">
+        {% csrf_token %}
+        <button type="submit" class="btn">
             <i id="full_heart_icon" class="fas fa-heart fa-2x" type="submit"></i>
                     
           </button>
-        </form>
-        
+      </form>
+
       {% endif %}
 
-                            </div>
-                            <div class="ratings">
-                                {% if product.reviews_received.all %}
-                                  {% if product.reviews_received.all|length == 1 %}
-                                    <p class="pull-right">{{product.reviews_received.all|length}} review</p>
-                                  {% else %}
-                                    <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
-                                {% endif %}
-                                {% endif %}
-                                
-                {% if product.stars %}
-                  {% for star in product.stars %}
-                    <i class="fas fa-star"></i>
-                  {% endfor %}
-                  {% if product.needs_half_star %}
-                    <i class="fa fa-star-half"></i>
-                  {% endif %}   
-                  {{product.average_rating}} avg rating
-                {% else %}
-                  <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
-                {% endif %}
-                            </div>
-                        </div>
-                        
-                    </div>
-    {% endfor %}
-    </div>
-    </div>
+      </div>
+      <div class="ratings">
+        {% if product.reviews_received.all %} {% if product.reviews_received.all|length == 1 %}
+        <p class="pull-right">{{product.reviews_received.all|length}} review</p>
+        {% else %}
+        <p class="pull-right">{{product.reviews_received.all|length}} reviews</p>
+        {% endif %} {% endif %} {% if product.stars %} {% for star in product.stars %}
+        <i class="fas fa-star"></i> {% endfor %} {% if product.needs_half_star %}
+        <i class="fa fa-star-half"></i> {% endif %} {{product.average_rating}} avg rating {% else %}
+        <p><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>No reviews yet</p>
+        {% endif %}
+      </div>
+      </div>
 
-    
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
 {% endblock %}

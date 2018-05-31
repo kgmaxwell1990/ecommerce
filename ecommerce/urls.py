@@ -18,7 +18,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', get_index, name="home"),
     url(r'^search/', do_search, name="search"),
-    
     url(r'^accounts/', include(account_urls)),
     url(r'^products/', include(product_urls)),
     url(r'^cart/', include(cart_urls)),

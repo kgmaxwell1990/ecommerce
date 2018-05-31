@@ -53,6 +53,14 @@ a:hover {
     display: none;
 }
 
+.home_page_text {
+    text-align: center;
+}
+
+.home_page_images img{
+    width: 100%;    
+}
+
 .product_name {
     letter-spacing: 4px; 
     border-bottom: 1px solid #aeaeb0;
@@ -258,7 +266,7 @@ a:hover {
     text-align: center;
 }
 
-.cart_items h4 {
+.cart_items h3 {
     border-bottom: 1px solid #aeaeb0;
 }
 

@@ -41,14 +41,13 @@
                     <li>
                     <form action={% url 'search' %}>
                         <input class="form-control" type="text" placeholder="Search Products" name="q" />
-                        
                     </form>
                     </li>
                     <li><a href="{% url 'home' %}"> Home</a></li>
-                    <li><a href="{% url 'products' %}"> Jewellery</a></li>
-                    <li><a href="#"> Bags</a></li>
-                    <li><a href="#"> Purses</a></li>
-                    <li><a href="#"> Scarves</a></li>
+                    <li><a href="{% url 'products' %}">All Products</a></li>
+                    {% for category in categories %}
+                    <li><a href="{% url 'categories' category %}">{{category}}</a></li>
+                    {% endfor %}
                     <li><a href="{% url 'view_cart' %}">Cart
                     {% if items_in_cart %}
                     <span class="badge item_badge">{{items_in_cart}}</span>
@@ -117,12 +116,11 @@
     </div>
     <div class="row ">
         <div class="col-sm-10 col-sm-offset-1 nav_items">
-                  <a href="{% url 'home' %}"> Home</a>
-                  <a href="{% url 'products' %}"> Jewellery</a>
-                  <a href="#"> Bags</a>
-                  <a href="#"> Purses</a>
-                  <a href="#"> Scarves</a>
-                    
+              <a href="{% url 'home' %}"> Home</a>
+              <a href="{% url 'products' %}">All Products</a>
+                {% for category in categories %}
+                <a href="{% url 'categories' category %}">{{category}}</a>
+                {% endfor %}
         </div>
     </div>
     
@@ -153,7 +151,7 @@
     <hr>
     <footer>
         <div class="container">
-            <p>Footer</p>
+
         </div>
     </footer>
     

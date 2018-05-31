@@ -3,7 +3,24 @@
 {% load bootstrap_tags %}
 
 {% block content %}
-<h1>Home Page</h1>
+<div class="home_page_text">
+<h1>Bringing Bohemian Jewellery, Hippy Jewellery, Gypsy Jewellery &
+Ethnic Accessories to your doorstep.</h1>
+</div>
+
+<div class="container">
+    <div class="row home_page_images">
+        <div class="col-sm-4">
+            <img src="{% static 'home/images/home1.jpg' %}"></img>
+        </div>
+        <div class="col-sm-4">
+            <img src="{% static 'home/images/home2.jpg' %}"></img>
+        </div>
+        <div class="col-sm-4">
+            <img src="{% static 'home/images/home3.jpg' %}"></img>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

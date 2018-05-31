@@ -1,7 +1,7 @@
 
 
     $("#empty_heart_form").mouseenter(function(){
-        $("#empty_heart_icon").addClass("fas fa-heart fa-2x");
+        
         $("#tooltip").css("display", "inline-block")
         $("#tooltip_remove").css("display", "inline-block")
     });

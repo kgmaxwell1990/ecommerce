@@ -7,9 +7,12 @@ from reviews.models import Review
 def get_products(request):
     products = Product.objects.all()
     wishlist = request.session.get('wishlist', {})
-    print(wishlist)
     in_wishlist = id in wishlist
     return render(request, 'products/products.html', {'products':products, 'in_wishlist': in_wishlist})
+    
+def get_cat_products(request, category):
+    products = Product.objects.filter(category=category)
+    return render(request, 'products/products.html', {'products':products})
     
 def view_product(request, id):
     product = get_object_or_404(Product, pk=id)
